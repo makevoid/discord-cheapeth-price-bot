@@ -4,9 +4,11 @@ BOT.command :ping do |evt|
   evt.respond 'Pong!'
 end
 
+CTX = Centex.new
+
 module CmdLib
   def cmd_price
-    Centex.last_price
+    CTX.ticker symbol: :CTH
   end
 end
 
@@ -22,7 +24,8 @@ Help = -> (evt) {
 
 Price = -> (evt) {
   puts "> price()"
-  evt.respond "```#{cmd_price}...```"
+  mid_price = cmd_price.to_f.round(7)
+  evt.respond "```#{("%0.7f" % x).remove_trailing_zeroes}...```"
 }
 
 # bot chat commands
