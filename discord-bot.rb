@@ -25,7 +25,7 @@ Help = -> (evt) {
 Price = -> (evt) {
   puts "> price()"
   mid_price = cmd_price.to_f.round(7)
-  evt.respond "```#{("%0.7f" % mid_price).remove_trailing_zeroes}...```"
+  evt.respond "```1 cTH = #{("%0.7f" % mid_price).remove_trailing_zeroes} ETH```"
 }
 
 # bot chat commands
