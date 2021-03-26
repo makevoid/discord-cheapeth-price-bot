@@ -1,8 +1,12 @@
 # usage:
 #
+#   require_relative 'lib/mid_price'
+#   require_relative 'lib/bitstamp'
+#   require_relative 'lib/centex'
+#
 #   c = Centex.new
-#   c.ticker symbol: :CTH #=> "0.0123"
-#   # returns the current mid price from centex tickers API
+#   c.ticker symbol: :CTH #=> { price: "0.0123", price_usd: "0.1" } # (sample prices)
+#   # returns the current mid price from centex tickers API in both ETH and USD
 #
 
 class Centex
@@ -60,11 +64,4 @@ class Centex
     }
   }
 
-end
-
-if __FILE__ == $0
-  require 'bundler'
-  Bundler.require :default
-  c = Centex.new
-  c.ticker symbol: :CTH
 end
