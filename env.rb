@@ -11,6 +11,8 @@ PATH = path
 
 require_relative 'env_secret' # NOTE: see readme, you need to configure the secrets to be able to start the app
 require_relative 'lib/monkeypatches'
+require_relative 'lib/mid_price'
+require_relative 'lib/bitstamp'
 require_relative 'lib/centex'
 
 raise "No secret `CLIENT_SECRET`" unless defined? CLIENT_SECRET

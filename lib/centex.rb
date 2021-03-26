@@ -7,6 +7,10 @@
 
 class Centex
 
+  STAMP = Bitstamp.new # fetch ETHUSD from bitstamp
+
+  include MidPrice
+
   API_HOST = "https://api.centex.io"
   TICKERS_URL = "#{API_HOST}/v1/public/tickers"
 
@@ -27,7 +31,13 @@ class Centex
     tickers = JSON.parse tickers
     pair = ALT_PAIRS.fetch symbol
     ticker = tickers.find &FindTicker.(pair)
-    mid_price ticker
+    price = mid_price ticker
+    price_ethusd = price_ethusd_get
+    price_usd = price * price_ethusd
+    {
+      price:      price,
+      price_usd:  price_usd,
+    }
   end
 
   def self.ticker(symbol:)
@@ -39,18 +49,16 @@ class Centex
     resp.body
   end
 
+  def price_ethusd_get
+    STAMP.ticker_ethusd
+  end
+
   FindTicker = -> (pair) {
     -> (tick) {
       ticker_id = tick.fetch "ticker_id"
       ticker_id == pair
     }
   }
-
-  def mid_price(ticker)
-    ask_price = BigDecimal ticker.fetch("ask")
-    bid_price = BigDecimal ticker.fetch("bid")
-    (ask_price + bid_price) / 2
-  end
 
 end
 
