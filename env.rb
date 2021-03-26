@@ -28,3 +28,12 @@ BOT = Discordrb::Commands::CommandBot.new token: BOT_TOKEN, prefix: '!'
 
 # use this url to authorize (replace client id with your `client_id`):
 # https://discordapp.com/oauth2/authorize?&client_id=558267878462324736&scope=bot&permissions=8
+
+ETH_RPC_PATH = "/rpc"
+require_relative 'lib/web3-monkeypatches'
+
+WEB3 = Web3::Eth::Rpc.new host: 'node.cheapeth.org',
+                          port: 443,
+                          connect_options: { use_ssl: true }
+
+require_relative 'lib/eth'

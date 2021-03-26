@@ -6,20 +6,55 @@ end
 
 CTX = Centex.new
 
+# TODO: move these modules out
+
 module CmdLib
+
   def cmd_price
     CTX.ticker symbol: :CTH
   end
+
+end
+
+module FmtLib
+
+  # format timestamp
+  def f_timestamp(timestamp)
+    timestamp = hex_to_int timestamp
+    Time.at(timestamp).strftime "%H:%M:%S"
+  end
+
+  # utils - hex string to integer
+  def hex_to_int(value)
+    validate_timestamp_hash value
+    value.to_i 16
+  end
+
+  # utils - hex validations - timestamp
+  def validate_timestamp_hash(hash)
+    raise "HexTimestampValueFormatError" if !hash.is_a?(String) || hash[0..1] != "0x" || hash.size != 10
+  end
+
 end
 
 include CmdLib
+include FmtLib
 
 # bot high level commmands
 
 Help = -> (evt) {
   evt.respond "```
 !price - prints ETH-cTH price from centex
+!block - prints the latest block info
 ```"
+}
+
+Block = -> (evt) {
+  block = ETH.block_latest
+  id    = block.fetch :id
+  num   = block.fetch :num
+  time  = f_timestamp block.fetch :time
+  evt.respond "```#{id} (##{num} @ #{time.strftime "%H:%M:%S"})```"
 }
 
 Price = -> (evt) {
@@ -36,6 +71,10 @@ Price = -> (evt) {
 
 BOT.command :"help" do |evt|
   Help.(evt)
+end
+
+BOT.command :"block" do |evt|
+  Block.(evt)
 end
 
 BOT.command :"price" do |evt|
