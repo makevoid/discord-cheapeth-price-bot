@@ -54,7 +54,7 @@ Block = -> (evt) {
   id    = block.fetch :id
   num   = block.fetch :num
   time  = f_timestamp block.fetch :time
-  evt.respond "```#{id} (##{num} @ #{time.strftime "%H:%M:%S"})```"
+  evt.respond "```#{id} (##{num} @ #{time})```"
 }
 
 Price = -> (evt) {
