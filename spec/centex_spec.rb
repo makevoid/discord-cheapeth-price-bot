@@ -7,7 +7,7 @@ describe "Centex" do
     Centex.send :remove_const, :STAMP
     bitstamp = Bitstamp.new
     allow(bitstamp).to receive(:ethusd_get) {
-      {"high" => "1680.00", "last" => "1626.28", "timestamp" => "1616735804", "bid" => "1625.16", "vwap" => "1603.21", "volume" => "63298.53412520", "low" => "1553.00", "ask" => "1626.14", "open" => "1586.48"}.to_json
+      {"high" => "2000.00", "last" => "2000.00", "timestamp" => "1616735804", "bid" => "1000.00", "vwap" => "...", "volume" => "63298.53412520", "low" => "1000.00", "ask" => "2000.00", "open" => "1000.00"}.to_json
     }
     Centex::STAMP = bitstamp
   end
@@ -22,8 +22,10 @@ describe "Centex" do
 
   specify "gets ticker price (mid price)" do
     mid_price = 0.00003
+    mid_price_usd = 0.045
     price = centex.ticker symbol: :CTH
     price.fetch(:price).should == mid_price
+    price.fetch(:price_usd).should == mid_price_usd
   end
 
 end
