@@ -32,4 +32,10 @@ Latest ruby stable installed (should work with any ruby version from v2.1 onward
 @makevoid
 
 
+----
+
+Join this discord server if you want to try the bot: https://discord.gg/uJApvZky (makevoiders)
+
+
+
 based on https://github.com/makevoid/discord-daoc-phoenix-bot
