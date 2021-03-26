@@ -1,4 +1,4 @@
-#### discord-cheapeth-price-bot
+# discord-cheapeth-price-bot
 
 Discord bot that adds a `!price` command to the server /channel
 
