@@ -1,11 +1,13 @@
 # discord-cheapeth-price-bot
 
-Discord bot that adds a `!price` command to the server /channel
+Discord bot that fetches the latest cheapETH (cTH) price from the exchange(s) 
 
+The only command available at the moment is `!price` (gets cTH median price and prints it into the channel)
 
 #### Bot Usage
 
-Write `!price` in a channel where the bot is installed
+- Write `!price` in a channel where the bot is installed
+- profit! 
 
 ### Configure Env / Secrets
 
