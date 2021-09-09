@@ -56,7 +56,7 @@ class Bot
       engine: "davinci",
       parameters: {
         prompt: text,
-        max_tokens: 20,
+        max_tokens: 40,
         stop: ["Human:"],
       },
     )
