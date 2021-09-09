@@ -1,0 +1,13 @@
+version: 3
+
+services:
+  bot:
+    image: makevoid/blockchain-bot1
+    build:
+      context: .
+    environment:
+      - CLIENT_SECRET=xxx
+      - BOT_TOKEN=xxx
+      - OPENAI_TOKEN=xxx
+    # TODO: add restart policy
+    # TODO: test build, add info to readme

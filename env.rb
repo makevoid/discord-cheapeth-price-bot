@@ -14,6 +14,8 @@ require_relative 'lib/monkeypatches'
 require_relative 'lib/mid_price'
 require_relative 'lib/bitstamp'
 require_relative 'lib/centex'
+require_relative 'lib/gpt3_bot_config'
+require_relative 'lib/gpt3'
 
 raise "No secret `CLIENT_SECRET`" unless defined? CLIENT_SECRET
 raise "No secret `BOT_TOKEN`" unless defined? BOT_TOKEN

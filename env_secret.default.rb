@@ -1,2 +1,3 @@
 CLIENT_SECRET = ""
 BOT_TOKEN = ""
+OPENAI_TOKEN = ""

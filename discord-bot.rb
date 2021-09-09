@@ -81,9 +81,27 @@ BOT.command :"price" do |evt|
   Price.(evt)
 end
 
+
+# Talk to gpt3 BOT
+BOT.command :"bot1", min_args: 1, max_args: 20 do |evt, *prompt|
+  prompt = prompt.join " "
+  evt.respond GPT3Demo.(prompt, bot_id: 1)
+end
+
+  BOT.command :"bot2", min_args: 1, max_args: 20 do |evt, *prompt|
+  prompt = prompt.join " "
+  evt.respond GPT3Demo.(prompt, bot_id: 2)
+end
+
+  BOT.command :"bot3", min_args: 1, max_args: 20 do |evt, *prompt|
+  prompt = prompt.join " "
+  evt.respond GPT3Demo.(prompt, bot_id: 3)
+end
+
+
 # sample commands
 #
-# BOT.command :"who", min_args: 1, max_args: 1 do |evt, char_name|
+# BOT.command :"who", min_args: 1, max_args: 20 do |evt, char_name|
 #   Who.(evt, char_name)
 # end
 #

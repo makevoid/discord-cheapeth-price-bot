@@ -17,3 +17,5 @@ group :test, :development do
   gem "rspec-mocks"
   gem "rspec-expectations"
 end
+
+gem "ruby-openai", "~> 1.3"
