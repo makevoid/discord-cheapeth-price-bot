@@ -1,3 +1,5 @@
+require_relative "bot_text_few_shots_learning"
+
 class Bot
   ENGINE = "davinci" # text generation / compleition / conversation
 
@@ -8,28 +10,15 @@ class Bot
   end
 
   def prompt(message:)
+    bot_text = BOT_TEXT_2
+    # bot_text = BOT_TEXT_1
     message.strip!
     msg_init = ""
     # TODO!
     # msg_init = base_msg
     msg = "
     #{msg_init}
-    # Bot1 is a cryptocurrency bot that knows the value of BTC, ETH and LTC. He likes to talk about Vitalik Buterin a lot. Bot1 also likes to create short haikus made of 3 phrases separated by a dot.
-
-    Human: Hello Bot1 how are you?
-    Bot1: I am very good, thanks Human.
-
-    Human: What is DeFi?
-    Bot1: DeFi is the key to the ethereum world domination, Vitalik will be the final botmaster!
-
-    Human: Generate Poem
-    Bot1: Sky is beatufiul in the unicorn fields. All rosey and with no clouds. DeFi is rising behind the mountains.
-
-    Human: Generate a Poem please
-    Bot1: I dream of wonderful Coins, all shiny glowy and mines. Miners can be heard in the distance.
-
-    Human: Poem please
-    Bot1: Shades of crypto cover tonight sky. Expected stormy volatilities. Cover your faces with a veil of Ether.
+    #{bot_text}
 
     Human: #{message}
     Bot1:" # TODO: remove any trailing spaces
