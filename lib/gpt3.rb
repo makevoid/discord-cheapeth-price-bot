@@ -10,7 +10,7 @@ class Bot
   end
 
   def prompt(message:)
-    bot_text = BOT_TEXT_2
+    bot_text = BOT_TEXT_1
     # bot_text = BOT_TEXT_1
     message.strip!
     msg_init = ""
