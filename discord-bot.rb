@@ -88,16 +88,79 @@ BOT.command :"bot1", min_args: 1, max_args: 20 do |evt, *prompt|
   evt.respond GPT3Demo.(prompt, bot_id: 1)
 end
 
-  BOT.command :"bot2", min_args: 1, max_args: 20 do |evt, *prompt|
+BOT.command :"bot2", min_args: 1, max_args: 20 do |evt, *prompt|
   prompt = prompt.join " "
   evt.respond GPT3Demo.(prompt, bot_id: 2)
 end
 
-  BOT.command :"bot3", min_args: 1, max_args: 20 do |evt, *prompt|
+BOT.command :"bot3", min_args: 1, max_args: 20 do |evt, *prompt|
   prompt = prompt.join " "
   evt.respond GPT3Demo.(prompt, bot_id: 3)
 end
 
+BOT.command :"bot4", min_args: 1, max_args: 20 do |evt, *prompt|
+  user_id = 936929561302675456
+  resp = "/imagine prompt:test"
+  # evt.respond resp
+  user_obj = BOT.user user_id 
+  pm = user_obj.pm resp
+  p pm 
+  # evt.user.pm resp
+end
+
+user_id = 936929561302675456
+
+# BOT.message(content: "used") do |event|
+#   event.respond 'ok'
+# end
+
+def download_image(image_url:, download_path:)
+  image_name = File.basename image_url
+  download_path = "#{download_path}/#{image_name}"
+  File.open(download_path, 'wb') do |file|
+    response = Excon.get(image_url, response_block: ->(chunk, remaining_bytes, total_bytes) {
+      file.write chunk
+    })
+
+    if response.status == 200
+      puts "image downloaded"
+    else
+      puts "Error: #{response.status}"
+    end
+  end
+end
+
+# Example usage:
+
+BOT.message do |event|
+  # Get the latest message in the channel
+  latest_message = event.channel.history 1
+  latest_message = latest_message.first
+
+  # Print the message content to the console
+  # p latest_message
+  # puts latest_message.content
+
+  # -------
+  # latest_message = event.channel.load_message 1061155142629601360
+
+  next unless latest_message.attachments.any?
+  next unless latest_message.content =~ /(fast)/
+  next if latest_message.content =~ /upscaling/ # TODO: remove this if ENV["IGNORE_UPSCALE"] == "false"
+
+  attachment = latest_message.attachments.first
+
+  next unless attachment.image?
+
+  image_url = attachment.url
+
+
+  puts "midjourney message detected"
+  
+  puts "URL: #{attachment.url}\n\n"
+
+  download_image image_url: image_url, download_path: "./output_images"
+end
 
 # sample commands
 #

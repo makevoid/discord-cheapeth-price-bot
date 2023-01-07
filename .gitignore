@@ -1,1 +1,3 @@
 env_secret.rb
+output_images/*.png
+.DS_Store
