@@ -133,30 +133,18 @@ end
 # Example usage:
 
 BOT.message do |event|
-  # Get the latest message in the channel
   latest_message = event.channel.history 1
   latest_message = latest_message.first
-
-  # Print the message content to the console
-  # p latest_message
-  # puts latest_message.content
-
-  # -------
-  # latest_message = event.channel.load_message 1061155142629601360
 
   next unless latest_message.attachments.any?
   next unless latest_message.content =~ /(fast)/
   next if latest_message.content =~ /upscaling/ # TODO: remove this if ENV["IGNORE_UPSCALE"] == "false"
-
   attachment = latest_message.attachments.first
-
   next unless attachment.image?
 
   image_url = attachment.url
 
-
   puts "midjourney message detected"
-  
   puts "URL: #{attachment.url}\n\n"
 
   download_image image_url: image_url, download_path: "./output_images"
